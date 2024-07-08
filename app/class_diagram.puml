@@ -1,0 +1,97 @@
+@startuml
+
+class MainActivity {
+    - static final String TAG
+    - static final int REQUEST_CODE_LIST_ITEMS
+    - Button buttonStartListItems
+    - Button buttonStartChat
+    --
+    + void onCreate(Bundle savedInstanceState)
+    + void onActivityResult(int requestCode, int resultCode, Intent data)
+    + void onStart()
+    + void onResume()
+    + void onPause()
+    + void onStop()
+    + void onDestroy()
+}
+
+class Chat_window {
+    - static final String TAG
+    - ListView chatlistview
+    - EditText chat_input
+    - Button send_button
+    - ChatAdapter chat_adapter
+    - ChatManager chatManager
+    --
+    + void onCreate(Bundle savedInstanceState)
+    + boolean onOptionsItemSelected(MenuItem item)
+    + void onStart()
+    + void onResume()
+    + void onPause()
+    + void onStop()
+    + void onDestroy()
+}
+
+class ChatAdapter {
+    - Context ctx
+    - ArrayList<String> messages
+    --
+    + ChatAdapter(Context ctx, ArrayList<String> messages)
+    + int getCount()
+    + String getItem(int position)
+    + View getView(int position, View convertView, ViewGroup parent)
+}
+
+class ChatManager {
+    - ArrayList<String> chatMessages
+    --
+    + ChatManager()
+    + void addMessage(String message)
+    + ArrayList<String> getChatMessages()
+}
+
+class LoginActivity {
+    - static final String TAG
+    - static final String PREFS_NAME
+    - static final String EMAIL_KEY
+    - EditText emailedittext
+    - EditText passwordedittext
+    --
+    + void onCreate(Bundle savedInstanceState)
+    + void validateAndProceed()
+    + boolean isValidEmail(String email)
+    + void saveEmailAndProceed(String email)
+    + void onStart()
+    + void onResume()
+    + void onPause()
+    + void onStop()
+    + void onDestroy()
+}
+
+class ListItemsActivity {
+    - static final String TAG
+    - static final int REQUEST_IMAGE_CAPTURE
+    - static final int CAMERA_PERMISSION_REQUEST_CODE
+    - ImageButton imageButton
+    --
+    + void onCreate(Bundle savedInstanceState)
+    + void openCamera()
+    + boolean isCameraAvailable()
+    + void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
+    + void onActivityResult(int requestCode, int resultCode, Intent data)
+    + void showFinishDialog()
+    + void print(String message)
+    + void onStart()
+    + void onResume()
+    + void onPause()
+    + void onStop()
+    + void onDestroy()
+}
+
+MainActivity --> Chat_window : starts
+MainActivity --> ListItemsActivity : starts
+Chat_window *-- ChatAdapter : uses
+Chat_window *-- ChatManager : manages
+LoginActivity --> MainActivity : starts
+
+@enduml

@@ -1,0 +1,379 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > ListItemsActivity</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.andriodassignments</a>
+</div>
+
+<h1>Coverage Summary for Class: ListItemsActivity (com.example.andriodassignments)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ListItemsActivity</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/51)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ListItemsActivity$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ListItemsActivity$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ListItemsActivity$3</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ListItemsActivity$4</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/69)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.andriodassignments;
+&nbsp;
+&nbsp;import android.Manifest;
+&nbsp;import android.app.Activity;
+&nbsp;import android.content.Intent;
+&nbsp;import android.content.pm.PackageManager;
+&nbsp;import android.content.pm.ResolveInfo;
+&nbsp;import android.graphics.Bitmap;
+&nbsp;import android.os.Bundle;
+&nbsp;import android.provider.MediaStore;
+&nbsp;import android.util.Log;
+&nbsp;import android.widget.CheckBox;
+&nbsp;import android.widget.CompoundButton;
+&nbsp;import android.widget.ImageButton;
+&nbsp;import android.widget.Switch;
+&nbsp;import android.widget.Toast;
+&nbsp;import android.app.AlertDialog;
+&nbsp;import android.content.DialogInterface;
+&nbsp;
+&nbsp;import androidx.annotation.Nullable;
+&nbsp;import androidx.appcompat.app.AppCompatActivity;
+&nbsp;import androidx.core.app.ActivityCompat;
+&nbsp;import androidx.core.content.ContextCompat;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+<b class="nc">&nbsp;public class ListItemsActivity extends AppCompatActivity {</b>
+&nbsp;
+&nbsp;    // Defining the Constants and Variables that will be used
+&nbsp;    private static final String TAG = &quot;ListItemsActivity&quot;;
+&nbsp;    private static final int REQUEST_IMAGE_CAPTURE = 1;
+&nbsp;    private static final int CAMERA_PERMISSION_REQUEST_CODE = 100;
+&nbsp;    private ImageButton imageButton;
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void onCreate(Bundle savedInstanceState) {
+<b class="nc">&nbsp;        super.onCreate(savedInstanceState);</b>
+<b class="nc">&nbsp;        setContentView(R.layout.activity_list_items);</b>
+&nbsp;        // Here we are Finding the Image button on our UI and will set a onclick listener activity
+<b class="nc">&nbsp;        imageButton = findViewById(R.id.imageButton);</b>
+&nbsp;        // Below will check the permission for the Camera
+<b class="nc">&nbsp;        imageButton.setOnClickListener(v -&gt; {</b>
+<b class="nc">&nbsp;            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {</b>
+<b class="nc">&nbsp;                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                openCamera();</b>
+&nbsp;            }
+&nbsp;        });
+&nbsp;
+&nbsp;        // Here we are finding the Switch button and are setting the on checked Listener
+<b class="nc">&nbsp;        Switch switchButton = findViewById(R.id.switch1);</b>
+&nbsp;        // Setting the Toast on whether the Switch is used or Not
+<b class="nc">&nbsp;        switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {</b>
+&nbsp;            @Override
+&nbsp;            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+&nbsp;                CharSequence text;
+&nbsp;                int duration;
+&nbsp;
+<b class="nc">&nbsp;                if (isChecked) {</b>
+<b class="nc">&nbsp;                    text=getString(R.string.switch_on);</b>
+<b class="nc">&nbsp;                    duration = Toast.LENGTH_SHORT;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    text = getString(R.string.switch_off);</b>
+<b class="nc">&nbsp;                    duration = Toast.LENGTH_LONG;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                Toast toast = Toast.makeText(ListItemsActivity.this, text, duration);</b>
+<b class="nc">&nbsp;                toast.show();</b>
+&nbsp;            }
+&nbsp;        });
+&nbsp;
+&nbsp;        // Similarly we are doing this for Check Box Too
+<b class="nc">&nbsp;        CheckBox checkBox = findViewById(R.id.checkBox);</b>
+<b class="nc">&nbsp;        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {</b>
+&nbsp;            @Override
+&nbsp;            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+&nbsp;                // A dialog box will be Shown whe the activity is finished i.e when the checkbox is checked a dialog box will appear
+<b class="nc">&nbsp;                if (isChecked) {</b>
+<b class="nc">&nbsp;                    showFinishDialog();</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        });
+&nbsp;
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        Log.i(TAG, &quot;inside onCreate&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // This is a method to Open Camera
+&nbsp;    private void openCamera() {
+<b class="nc">&nbsp;        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);</b>
+<b class="nc">&nbsp;        if (isCameraAvailable()) {</b>
+<b class="nc">&nbsp;            Log.i(TAG, &quot;Camera activity resolved&quot;);</b>
+<b class="nc">&nbsp;            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            Log.e(TAG, &quot;No activity found to handle the camera intent&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    // Method foe checking the camera is available or not
+&nbsp;    private boolean isCameraAvailable() {
+<b class="nc">&nbsp;        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);</b>
+<b class="nc">&nbsp;        List&lt;ResolveInfo&gt; availableActivities = getPackageManager().queryIntentActivities(takePictureIntent, PackageManager.MATCH_DEFAULT_ONLY);</b>
+<b class="nc">&nbsp;        return !availableActivities.isEmpty();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+<b class="nc">&nbsp;        super.onRequestPermissionsResult(requestCode, permissions, grantResults);</b>
+<b class="nc">&nbsp;        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {</b>
+<b class="nc">&nbsp;            if (grantResults.length &gt; 0 &amp;&amp; grantResults[0] == PackageManager.PERMISSION_GRANTED) {</b>
+<b class="nc">&nbsp;                openCamera();</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                Log.e(TAG, &quot;Camera permission denied&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    // Below part is use to set the image that is clicked by the camera on the image button
+&nbsp;    @Override
+&nbsp;    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+<b class="nc">&nbsp;        super.onActivityResult(requestCode, resultCode, data);</b>
+<b class="nc">&nbsp;        if (requestCode == REQUEST_IMAGE_CAPTURE &amp;&amp; resultCode == RESULT_OK) {</b>
+<b class="nc">&nbsp;            if (data != null &amp;&amp; data.getExtras() != null) {</b>
+&nbsp;                /// Get the thumbnail of the image and set it to the ImageButton
+<b class="nc">&nbsp;                Bitmap imageBitmap = (Bitmap) data.getExtras().get(&quot;data&quot;);</b>
+<b class="nc">&nbsp;                imageButton.setImageBitmap(imageBitmap);</b>
+<b class="nc">&nbsp;                print(&quot;Image captured and set on ImageButton&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    // Below method is used to show the Toast message
+&nbsp;    private void print(String message) {
+<b class="nc">&nbsp;        int duration = Toast.LENGTH_SHORT;</b>
+<b class="nc">&nbsp;        Toast toast = Toast.makeText(ListItemsActivity.this, message, duration);</b>
+<b class="nc">&nbsp;        toast.show();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Below part is used to to show dialog box o/p To user
+&nbsp;    private void showFinishDialog() {
+<b class="nc">&nbsp;        AlertDialog.Builder builder = new AlertDialog.Builder(ListItemsActivity.this);</b>
+<b class="nc">&nbsp;        builder.setMessage(R.string.dialog_message)</b>
+<b class="nc">&nbsp;                .setTitle(R.string.dialog_title)</b>
+<b class="nc">&nbsp;                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {</b>
+&nbsp;                    public void onClick(DialogInterface dialog, int id) {
+&nbsp;                        // If the user clicks OK button, then the activity is finished
+<b class="nc">&nbsp;                        Intent resultIntent = new Intent();</b>
+<b class="nc">&nbsp;                        resultIntent.putExtra(&quot;Response&quot;, getString(R.string.response_message));</b>
+<b class="nc">&nbsp;                        setResult(Activity.RESULT_OK, resultIntent);</b>
+<b class="nc">&nbsp;                        finish();</b>
+&nbsp;                    }
+&nbsp;                })
+<b class="nc">&nbsp;                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {</b>
+&nbsp;                    public void onClick(DialogInterface dialog, int id) {
+&nbsp;                        // User cancelled the dialog
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                })
+<b class="nc">&nbsp;                .show();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void onStart() {
+<b class="nc">&nbsp;        super.onStart();</b>
+<b class="nc">&nbsp;        Log.i(TAG, &quot;inside onStart&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void onResume() {
+<b class="nc">&nbsp;        super.onResume();</b>
+<b class="nc">&nbsp;        Log.i(TAG, &quot;inside onResume&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void onPause() {
+<b class="nc">&nbsp;        super.onPause();</b>
+<b class="nc">&nbsp;        Log.i(TAG, &quot;inside onPause&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void onStop() {
+<b class="nc">&nbsp;        super.onStop();</b>
+<b class="nc">&nbsp;        Log.i(TAG, &quot;inside onStop&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected void onDestroy() {
+<b class="nc">&nbsp;        super.onDestroy();</b>
+<b class="nc">&nbsp;        Log.i(TAG, &quot;inside onDestroy&quot;);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-06-10 22:07</div>
+</div>
+</body>
+</html>
