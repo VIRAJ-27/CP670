@@ -1,6 +1,9 @@
 package com.example.andriodassignments;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,6 +34,7 @@ public class Chat_window extends AppCompatActivity {
     private Button send_button;
     private ChatAdapter chat_adapter;
     private ChatManager chatManager;
+    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,29 @@ public class Chat_window extends AppCompatActivity {
         chat_adapter = new ChatAdapter(this, chatManager.getChatMessages());
         chatlistview.setAdapter(chat_adapter);
 
+//        // Creating a temporary ChatDatabaseHelper object
+        ChatDatabaseHelper dbHelper = new ChatDatabaseHelper(this);
+        db = dbHelper.getWritableDatabase();
+
+        // Querying for existing chat messages
+        Cursor cursor = db.query(ChatDatabaseHelper.TABLE_NAME, null, null, null, null, null, null);
+
+        // Logging cursor information
+        Log.i(TAG, "Cursor's column count = " + cursor.getColumnCount());
+        for (int i = 0; i < cursor.getColumnCount(); i++) {
+            Log.i(TAG, "Column name: " + cursor.getColumnName(i));
+        }
+
+        // Retrieving and adding messages to the chatManager
+        if (cursor.moveToFirst()) {
+            do {
+                String message = cursor.getString(cursor.getColumnIndex(ChatDatabaseHelper.KEY_MESSAGE));
+                chatManager.addMessage(message);
+                Log.i(TAG, "SQL MESSAGE: " + message);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
         // Setting an OnClickListener for the send button
         send_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +92,11 @@ public class Chat_window extends AppCompatActivity {
                 String message = chat_input.getText().toString();
                 // If the message is not empty, add it to the list and update the adapter
                 if (!message.isEmpty()) {
+                    // Insert the new message into the database
+                    ContentValues values = new ContentValues();
+                    values.put(ChatDatabaseHelper.KEY_MESSAGE, message);
+                    db.insert(ChatDatabaseHelper.TABLE_NAME, null, values);
+//
                     chatManager.addMessage(message);
                     chat_adapter.notifyDataSetChanged(); // Notify the adapter to refresh the ListView
                     chat_input.setText(""); // Clear the input field
@@ -171,5 +203,8 @@ public class Chat_window extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.i(TAG, "inside onDestroy");
+        if (db != null) {
+            db.close();
+        }
     }
 }
