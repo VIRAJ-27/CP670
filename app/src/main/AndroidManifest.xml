@@ -10,6 +10,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <queries>
         <intent>
             <action android:name="android.media.action.IMAGE_CAPTURE" />
@@ -27,6 +29,10 @@
         android:theme="@style/Theme.AndriodAssignments"
         tools:targetApi="31">
         <activity
+            android:name=".WeatherForecast"
+            android:exported="false">
+    </activity>
+        <activity
             android:name=".dialog_custom"
             android:exported="false" />
         <activity
@@ -36,7 +42,8 @@
         <activity
             android:name=".TestToolbar"
             android:exported="false"
-            android:theme="@style/Theme.AndriodAssignments" />
+            android:theme="@style/Theme.AndriodAssignments"
+            tools:ignore="DuplicateActivity" />
 
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
@@ -63,19 +70,22 @@
             android:name=".MainActivity"
             android:exported="true"
             android:parentActivityName=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LoginActivity" />
         </activity>
         <activity
-            android:name=".LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        android:name=".LoginActivity"
+        android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
     </application>
 
 </manifest>

@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,46 +18,31 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     static final int REQUEST_CODE_LIST_ITEMS = 10;
+    private TextView forecastTextView;
+    private TextView progressTextView;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        // Finding the Button and we will set the onclick Listener
-        Button buttonStartListItems = findViewById(R.id.button);
-        buttonStartListItems.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Here we are starting the ListItemsActivity and are expecting some result from it.
-                Intent intent = new Intent(MainActivity.this, ListItemsActivity.class);
-                startActivityForResult(intent, REQUEST_CODE_LIST_ITEMS);
-            }
-        });
+        forecastTextView = findViewById(R.id.forecast_text_view);
+        progressTextView = findViewById(R.id.progress_text_view);
+        progressBar = findViewById(R.id.progress_bar);
 
-        // Find the start chat button and using it we will navigate to Chat_window
-        Button buttonStartChat = findViewById(R.id.start_button);
-        buttonStartChat.setOnClickListener(new View.OnClickListener() {
+        Button buttonWeather = findViewById(R.id.weather_button);
+        buttonWeather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(TAG, "User clicked Start Chat");
-                Intent intent = new Intent(MainActivity.this, Chat_window.class);
-                startActivity(intent);
-            }
-        });
-
-        // Find the Test Toolbar button and set the onClickListener
-        Button buttonTestToolbar = findViewById(R.id.button_test_toolbar);
-        buttonTestToolbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "User clicked Test Toolbar");
-                Intent intent = new Intent(MainActivity.this, TestToolbar.class);
+                Log.i(TAG, "User clicked Weather Button");
+                Intent intent = new Intent(MainActivity.this, WeatherForecast.class);
                 startActivity(intent);
             }
         });
@@ -99,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_LIST_ITEMS) {
             Log.i(TAG, "Returned to the MainActivity.onActivityResult");
             if (resultCode == RESULT_OK) {
-                // Getting the Response Message from the ListItemsActivity
                 String messagePassed = data.getStringExtra("Response");
                 if (messagePassed != null) {
                     Toast.makeText(this, getString(R.string.list_items_passed) + messagePassed, Toast.LENGTH_SHORT).show();
